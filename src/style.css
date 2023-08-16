@@ -60,8 +60,76 @@ header ul {
   gap: 40px;
 }
 
+.character-container {
+  max-width: 200px;
+}
+
+.header-list {
+  justify-self: end;
+}
+
+.below-image,
+.likes,
+.reactions,
+main {
+  display: flex;
+}
+
+li,
+.fa-heart,
+.comment,
+.reservation {
+  cursor: pointer;
+}
+
 li:nth-child(1) {
   text-decoration: underline;
+}
+
+.fa-heart {
+  margin-top: 15px;
+  font-size: 25px;
+}
+
+.comment,
+.reservation {
+  border: 1px solid #1d4f84;
+  padding: 3px;
+  box-shadow: 4px 4px 0 rgb(2, 2, 2);
+}
+
+.fa-heart:hover,
+.comment:hover,
+.reservation:hover {
+  color: blue;
+}
+
+main {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 700px;
+  align-items: center;
+  margin: 20px  auto;
+}
+
+.character {
+  width: 200px;
+  height: 200px;
+}
+
+.below-image {
+  padding: 5px;
+  justify-content: space-between;
+}
+
+.likes,
+.reactions {
+  flex-direction: column;
+  align-items: center;
+}
+
+.reactions {
+  gap: 10px;
 }
 
 footer {

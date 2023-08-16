@@ -84,6 +84,7 @@
 - [ ]  style the app with CSS loader
 - [ ]  HTML webpack plugin
 - [ ]  Add header and footer.
+- [ ] Display character movies list on home page
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -171,7 +172,6 @@ To check for js errors run:
 ## 🔭 Future Features <a name="future-features"></a>
 
 > The following features will add to the project.
-- [ ] Display movies list
 - [ ] Display popup comments
 - [ ] Display the number of likes for each movies
 - [ ] Add new likes and comment features
