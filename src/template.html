@@ -5,20 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <header class="header">
-        <img src="./assets/r-and-m-logo.png" alt="">
-        <ul class="header-list">
+    <header>
+        <img src=<%=require("./assets/movie-app-logo.png")%> alt="Awesome movies logo" class="logo">
+        <ul class="menu">
           <li>Characters(10)</li>
           <li>Weapons</li>
           <li>Agilities</li>
         </ul>
     </header>
     <footer>
-      <hr>
-      <small>Created by Microverse under CC License</small>
+      <p>Created by Muluken and Edgah under MIT license</p>
     </footer>
 </body>
 </html>
