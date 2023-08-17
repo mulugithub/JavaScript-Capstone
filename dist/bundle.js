@@ -10,11 +10,17 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addComment: () => (/* binding */ addComment),
 /* harmony export */   addLike: () => (/* binding */ addLike),
 /* harmony export */   fetchCharacterDetails: () => (/* binding */ fetchCharacterDetails),
 /* harmony export */   fetchCharacters: () => (/* binding */ fetchCharacters),
+/* harmony export */   fetchComments: () => (/* binding */ fetchComments),
+/* harmony export */   fetchLikesFromInvolvementAPI: () => (/* binding */ fetchLikesFromInvolvementAPI),
+/* harmony export */   initialize: () => (/* binding */ initialize),
 /* harmony export */   loadCharacters: () => (/* binding */ loadCharacters),
-/* harmony export */   updateModalContent: () => (/* binding */ updateModalContent)
+/* harmony export */   updateLocalStorage: () => (/* binding */ updateLocalStorage),
+/* harmony export */   updateModalContent: () => (/* binding */ updateModalContent),
+/* harmony export */   updateUIWithLikeCounts: () => (/* binding */ updateUIWithLikeCounts)
 /* harmony export */ });
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -22,17 +28,19 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return { value: void 0, done: !0 }; } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable || "" === iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } throw new TypeError(_typeof(iterable) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-// Fetch Characters data from API
-function fetchCharacters() {
-  return _fetchCharacters.apply(this, arguments);
-}
-
-// Function to update localStorage with new like count
-function _fetchCharacters() {
-  _fetchCharacters = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+/* global bootstrap */
+var myAppId = '3rhiucgu7avOD8E9hBq1';
+var fetchCharacters = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var response, data;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -57,29 +65,24 @@ function _fetchCharacters() {
       }
     }, _callee, null, [[0, 10]]);
   }));
-  return _fetchCharacters.apply(this, arguments);
-}
-function updateLocalStorage(characterId, likeCount) {
+  return function fetchCharacters() {
+    return _ref.apply(this, arguments);
+  };
+}();
+var updateLocalStorage = function updateLocalStorage(characterId, likeCount) {
   var storedLikes = JSON.parse(localStorage.getItem('likes')) || {};
   storedLikes[characterId] = likeCount;
   localStorage.setItem('likes', JSON.stringify(storedLikes));
-}
-
-// Add a new function to add a like for a character and save it to the Involvement API
-function addLike(_x) {
-  return _addLike.apply(this, arguments);
-}
-
-// Fetch the like counts from the Involvement API
-function _addLike() {
-  _addLike = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(characterId) {
+};
+var addLike = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(characterId) {
     var response, likeCountElement, currentLikes, newLikes;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
-          return fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/3rhiucgu7avOD8E9hBq1/likes', {
+          return fetch("https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/".concat(myAppId, "/likes"), {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -90,44 +93,37 @@ function _addLike() {
           });
         case 3:
           response = _context2.sent;
-          if (!response.ok) {
-            _context2.next = 9;
+          if (response.ok) {
+            _context2.next = 6;
             break;
           }
-          // Update the UI with the new like count
+          throw new Error('Failed to add like');
+        case 6:
           likeCountElement = document.querySelector("[data-id=\"".concat(characterId, "\"] + .like-count"));
           if (likeCountElement) {
             currentLikes = parseInt(likeCountElement.textContent, 10);
             newLikes = currentLikes + 1;
             likeCountElement.textContent = "".concat(newLikes, " Like").concat(newLikes === 1 ? '' : 's');
-
-            // Update localStorage with new like count
             updateLocalStorage(characterId, newLikes);
           }
-          _context2.next = 10;
+          _context2.next = 13;
           break;
-        case 9:
-          throw new Error('Failed to add like');
         case 10:
-          _context2.next = 15;
-          break;
-        case 12:
-          _context2.prev = 12;
+          _context2.prev = 10;
           _context2.t0 = _context2["catch"](0);
           throw new Error('Error adding like');
-        case 15:
+        case 13:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 12]]);
+    }, _callee2, null, [[0, 10]]);
   }));
-  return _addLike.apply(this, arguments);
-}
-function fetchLikesFromInvolvementAPI(_x2) {
-  return _fetchLikesFromInvolvementAPI.apply(this, arguments);
-} // Function to fetch additional character details
-function _fetchLikesFromInvolvementAPI() {
-  _fetchLikesFromInvolvementAPI = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(characters) {
+  return function addLike(_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var fetchLikesFromInvolvementAPI = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(characters) {
     var likes, characterIds;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
@@ -138,14 +134,14 @@ function _fetchLikesFromInvolvementAPI() {
           });
           _context4.next = 4;
           return Promise.all(characterIds.map( /*#__PURE__*/function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(characterId) {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(characterId) {
               var response, data;
               return _regeneratorRuntime().wrap(function _callee3$(_context3) {
                 while (1) switch (_context3.prev = _context3.next) {
                   case 0:
                     _context3.prev = 0;
                     _context3.next = 3;
-                    return fetch("https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/3rhiucgu7avOD8E9hBq1/likes?item_id=".concat(characterId));
+                    return fetch("https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/".concat(myAppId, "/likes?item_id=").concat(characterId));
                   case 3:
                     response = _context3.sent;
                     if (!response.ok) {
@@ -170,8 +166,8 @@ function _fetchLikesFromInvolvementAPI() {
                 }
               }, _callee3, null, [[0, 11]]);
             }));
-            return function (_x4) {
-              return _ref.apply(this, arguments);
+            return function (_x3) {
+              return _ref4.apply(this, arguments);
             };
           }()));
         case 4:
@@ -182,15 +178,12 @@ function _fetchLikesFromInvolvementAPI() {
       }
     }, _callee4);
   }));
-  return _fetchLikesFromInvolvementAPI.apply(this, arguments);
-}
-function fetchCharacterDetails(_x3) {
-  return _fetchCharacterDetails.apply(this, arguments);
-}
-
-// Update the UI with the like counts
-function _fetchCharacterDetails() {
-  _fetchCharacterDetails = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(characterId) {
+  return function fetchLikesFromInvolvementAPI(_x2) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var fetchCharacterDetails = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(characterId) {
     var response, data;
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
@@ -211,7 +204,7 @@ function _fetchCharacterDetails() {
             species: data.species,
             gender: data.gender,
             origin: data.origin,
-            comments: ['Comment 1', 'Comment 2', 'Comment 3'] // Replace with actual comments data
+            comments: ['Comment 1', 'Comment 2', 'Comment 3']
           });
         case 10:
           _context5.prev = 10;
@@ -223,51 +216,43 @@ function _fetchCharacterDetails() {
       }
     }, _callee5, null, [[0, 10]]);
   }));
-  return _fetchCharacterDetails.apply(this, arguments);
-}
-function updateUIWithLikeCounts(likes) {
-  var characterIds = document.querySelectorAll('[data-id]');
-  characterIds.forEach(function (characterId) {
-    var likeCountElement = characterId.nextElementSibling.querySelector('.like-count');
-    var likeCount = likes[characterId.getAttribute('data-id')];
-    likeCountElement.textContent = "".concat(likeCount || 0, " Like").concat(likeCount === 0 ? '' : 's');
+  return function fetchCharacterDetails(_x4) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+var updateUIWithLikeCounts = function updateUIWithLikeCounts(likes) {
+  var likeCountElements = document.querySelectorAll('.like-count');
+  likeCountElements.forEach(function (likeCountElement) {
+    var _likeCountElement$par;
+    var characterId = (_likeCountElement$par = likeCountElement.parentElement.querySelector('.fa-heart')) === null || _likeCountElement$par === void 0 ? void 0 : _likeCountElement$par.getAttribute('data-id');
+    var likeCount = likes[characterId] || 0;
+    likeCountElement.textContent = "".concat(likeCount, " Like").concat(likeCount === 1 ? '' : 's');
   });
-}
-
-// Load characters to UI
-function loadCharacters() {
-  return _loadCharacters.apply(this, arguments);
-}
-
-// Function to update modal content with character details
-function _loadCharacters() {
-  _loadCharacters = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
-    var charactersContainer, characterCountElement, characters, storedLikes, likes, mergedLikes, characterPromises, charactersWithDetails, likeIcons;
-    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-      while (1) switch (_context8.prev = _context8.next) {
+};
+var cWithDetails = [];
+var loadCharacters = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+    var charactersContainer, characters, _yield$Promise$all, _yield$Promise$all2, storedLikes, likes, mergedLikes, characterPromises;
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
         case 0:
           charactersContainer = document.querySelector('.all-characters');
-          characterCountElement = document.getElementById('character-count');
-          _context8.next = 4;
+          _context7.next = 3;
           return fetchCharacters();
-        case 4:
-          characters = _context8.sent;
-          // Display Character counts
-          characterCountElement.textContent = "Characters(".concat(characters.length, ")");
-
-          // Fetch likes from localStorage
-          storedLikes = JSON.parse(localStorage.getItem('likes')) || {}; // Fetch likes from Involvement API
-          _context8.next = 9;
-          return fetchLikesFromInvolvementAPI(characters);
-        case 9:
-          likes = _context8.sent;
-          // Merge likes from localStorage and Involvement API
-          mergedLikes = _objectSpread(_objectSpread({}, likes), storedLikes); // Update the UI with the like counts
+        case 3:
+          characters = _context7.sent;
+          _context7.next = 6;
+          return Promise.all([JSON.parse(localStorage.getItem('likes')) || {}, fetchLikesFromInvolvementAPI(characters)]);
+        case 6:
+          _yield$Promise$all = _context7.sent;
+          _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 2);
+          storedLikes = _yield$Promise$all2[0];
+          likes = _yield$Promise$all2[1];
+          mergedLikes = _objectSpread(_objectSpread({}, likes), storedLikes);
           updateUIWithLikeCounts(mergedLikes);
-
-          // Fetch character details for all characters
+          charactersContainer.innerHTML = '';
           characterPromises = characters.map( /*#__PURE__*/function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(character) {
+            var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(character) {
               var characterDetails;
               return _regeneratorRuntime().wrap(function _callee6$(_context6) {
                 while (1) switch (_context6.prev = _context6.next) {
@@ -276,7 +261,7 @@ function _loadCharacters() {
                     return fetchCharacterDetails(character.id);
                   case 2:
                     characterDetails = _context6.sent;
-                    character.comments = characterDetails.comments; // Add comments to the character object
+                    character.comments = characterDetails.comments;
                     return _context6.abrupt("return", character);
                   case 5:
                   case "end":
@@ -285,128 +270,411 @@ function _loadCharacters() {
               }, _callee6);
             }));
             return function (_x5) {
-              return _ref2.apply(this, arguments);
+              return _ref7.apply(this, arguments);
             };
-          }()); // Wait for all character details to be fetched
-          _context8.next = 15;
+          }());
+          _context7.next = 16;
           return Promise.all(characterPromises);
-        case 15:
-          charactersWithDetails = _context8.sent;
-          // Update the UI with characters and their details
-          charactersWithDetails.forEach(function (character) {
+        case 16:
+          cWithDetails = _context7.sent;
+          cWithDetails.forEach(function (character) {
             var characterElement = document.createElement('div');
-            characterElement.setAttribute('class', 'character-container');
+            characterElement.className = 'character-container';
             characterElement.innerHTML = "\n        <img class=\"character\" src=\"".concat(character.image, "\" alt=\"Image of - ").concat(character.name, "\">\n        <div class=\"below-image\">\n          <p class=\"character-name\">").concat(character.name, "</p>\n          <div class=\"likes\">\n            <i class=\"fa-regular fa-heart\" data-id=\"").concat(character.id, "\"></i>\n            <p class=\"like-count\">").concat(mergedLikes[character.id] || 0, " Like").concat(mergedLikes[character.id] === 0 ? '' : 's', "</p>\n          </div>\n        </div>\n        <div class=\"reactions\">\n          <span class=\"comment\" data-id=\"").concat(character.id, "\" data-bs-toggle=\"modal\" data-bs-target=\"#modal-container\">Comments</span>\n          <span class=\"reservation\">Reservations</span>\n        </div>\n      ");
             charactersContainer.appendChild(characterElement);
           });
-
-          // Add event listener to each "Likes" icon
-          likeIcons = document.querySelectorAll('.fa-heart');
-          likeIcons.forEach(function (likeIcon) {
-            likeIcon.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-              var characterId;
-              return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-                while (1) switch (_context7.prev = _context7.next) {
-                  case 0:
-                    characterId = likeIcon.getAttribute('data-id');
-                    _context7.next = 3;
-                    return addLike(characterId);
-                  case 3:
-                  case "end":
-                    return _context7.stop();
-                }
-              }, _callee7);
-            })));
-          });
-          return _context8.abrupt("return", charactersWithDetails);
-        case 20:
+          return _context7.abrupt("return", cWithDetails);
+        case 19:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7);
+  }));
+  return function loadCharacters() {
+    return _ref6.apply(this, arguments);
+  };
+}();
+var countCharacters = /*#__PURE__*/function () {
+  var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+    var characters, characterCountElement;
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.next = 2;
+          return fetchCharacters();
+        case 2:
+          characters = _context8.sent;
+          characterCountElement = document.getElementById('character-count');
+          characterCountElement.textContent = "Characters(".concat(characters.length, ")");
+        case 5:
         case "end":
           return _context8.stop();
       }
     }, _callee8);
   }));
-  return _loadCharacters.apply(this, arguments);
-}
-function updateModalContent(character) {
-  var _character$origin;
-  var modalBody = document.querySelector('.modal-body');
-  if (!modalBody) {
-    throw new Error('Modal body not found');
-  }
-  var characterContainer = modalBody.querySelector('.character-content');
-  if (!characterContainer) {
-    throw new Error('Character container not found');
-  }
-  var features1 = modalBody.querySelector('.features-1');
-  if (!features1) {
-    throw new Error('Features 1 container not found');
-  }
-  var features2 = modalBody.querySelector('.features-2');
-  if (!features2) {
-    throw new Error('Features 2 container not found');
-  }
-  var commentsList = modalBody.querySelector('ul');
-  if (!commentsList) {
-    throw new Error('Comments list not found');
-  }
-  characterContainer.querySelector('img').src = character.image;
-  characterContainer.querySelector('p').textContent = character.name;
-  features1.innerHTML = "\n    <p><b>Status:</b> ".concat(character.status || 'Unknown', "</p>\n    <p><b>Species:</b> ").concat(character.species || 'Unknown', "</p>\n  ");
-  features2.innerHTML = "\n    <p><b>Gender:</b> ".concat(character.gender || 'Unknown', "</p>\n    <p><b>Origin:</b> ").concat(((_character$origin = character.origin) === null || _character$origin === void 0 ? void 0 : _character$origin.name) || 'Unknown', "</p>\n  ");
-  commentsList.innerHTML = (character.comments || []).map(function (comment) {
-    return "<li>".concat(comment, "</li>");
-  }).join('');
-}
-
-// Load characters and update UI on page load
-function initialize() {
-  return _initialize.apply(this, arguments);
-}
-function _initialize() {
-  _initialize = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
-    var charactersContainer;
+  return function countCharacters() {
+    return _ref8.apply(this, arguments);
+  };
+}();
+var countComments = /*#__PURE__*/function () {
+  var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(data) {
+    var commentCountElement;
+    return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          commentCountElement = document.getElementById('comment-counter');
+          commentCountElement.textContent = "Comments(".concat(data.length < 1 ? 0 : data.length, ")");
+        case 2:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9);
+  }));
+  return function countComments(_x6) {
+    return _ref9.apply(this, arguments);
+  };
+}();
+var fetchComments = /*#__PURE__*/function () {
+  var _ref10 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(appId, characterId) {
+    var queryString, url, response, data, errorMessage;
     return _regeneratorRuntime().wrap(function _callee10$(_context10) {
       while (1) switch (_context10.prev = _context10.next) {
         case 0:
-          _context10.next = 2;
-          return loadCharacters();
-        case 2:
-          // Add event listener to the parent container of "Likes" icons
-          charactersContainer = document.querySelector('.all-characters');
-          charactersContainer.addEventListener('click', /*#__PURE__*/function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(event) {
-              var characterId;
-              return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-                while (1) switch (_context9.prev = _context9.next) {
-                  case 0:
-                    if (!event.target.classList.contains('fa-heart')) {
-                      _context9.next = 6;
-                      break;
-                    }
-                    characterId = event.target.getAttribute('data-id');
-                    event.target.classList.add('disabled'); // Disable the icon temporarily
-                    _context9.next = 5;
-                    return addLike(characterId);
-                  case 5:
-                    event.target.classList.remove('disabled'); // Re-enable the icon
-                  case 6:
-                  case "end":
-                    return _context9.stop();
-                }
-              }, _callee9);
-            }));
-            return function (_x6) {
-              return _ref4.apply(this, arguments);
-            };
-          }());
-        case 4:
+          _context10.prev = 0;
+          queryString = "?item_id=".concat(characterId);
+          url = "https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/".concat(appId, "/comments").concat(queryString);
+          _context10.next = 5;
+          return fetch(url);
+        case 5:
+          response = _context10.sent;
+          if (!response.ok) {
+            _context10.next = 12;
+            break;
+          }
+          _context10.next = 9;
+          return response.json();
+        case 9:
+          data = _context10.sent;
+          countComments(data);
+          return _context10.abrupt("return", data.map(function (comment) {
+            var formattedDate = new Date(comment.creation_date).toLocaleDateString();
+            return "".concat(formattedDate, " ").concat(comment.username, ": ").concat(comment.comment);
+          }));
+        case 12:
+          _context10.next = 14;
+          return response.text();
+        case 14:
+          errorMessage = _context10.sent;
+          throw new Error("Failed to fetch comments: ".concat(errorMessage));
+        case 18:
+          _context10.prev = 18;
+          _context10.t0 = _context10["catch"](0);
+          return _context10.abrupt("return", []);
+        case 21:
         case "end":
           return _context10.stop();
       }
-    }, _callee10);
+    }, _callee10, null, [[0, 18]]);
   }));
-  return _initialize.apply(this, arguments);
-}
+  return function fetchComments(_x7, _x8) {
+    return _ref10.apply(this, arguments);
+  };
+}();
+var updateModalContent = /*#__PURE__*/function () {
+  var _ref11 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(character) {
+    var _character$origin;
+    var modalBody, characterContainer, features1, features2, commentsList, updatedComments;
+    return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+      while (1) switch (_context11.prev = _context11.next) {
+        case 0:
+          modalBody = document.querySelector('.modal-body');
+          if (modalBody) {
+            _context11.next = 3;
+            break;
+          }
+          throw new Error('Modal body not found');
+        case 3:
+          characterContainer = modalBody.querySelector('.character-content');
+          if (characterContainer) {
+            _context11.next = 6;
+            break;
+          }
+          throw new Error('Character container not found');
+        case 6:
+          features1 = modalBody.querySelector('.features-1');
+          if (features1) {
+            _context11.next = 9;
+            break;
+          }
+          throw new Error('Features 1 container not found');
+        case 9:
+          features2 = modalBody.querySelector('.features-2');
+          if (features2) {
+            _context11.next = 12;
+            break;
+          }
+          throw new Error('Features 2 container not found');
+        case 12:
+          commentsList = modalBody.querySelector('.comment-body');
+          if (commentsList) {
+            _context11.next = 15;
+            break;
+          }
+          throw new Error('Comments list not found');
+        case 15:
+          characterContainer.querySelector('img').src = character.image;
+          characterContainer.querySelector('p').textContent = character.name;
+          features1.innerHTML = "\n    <p><b>Status:</b> ".concat(character.status || 'Unknown', "</p>\n    <p><b>Species:</b> ").concat(character.species || 'Unknown', "</p>\n  ");
+          features2.innerHTML = "\n    <p><b>Gender:</b> ".concat(character.gender || 'Unknown', "</p>\n    <p><b>Origin:</b> ").concat(((_character$origin = character.origin) === null || _character$origin === void 0 ? void 0 : _character$origin.name) || 'Unknown', "</p>\n  ");
+          _context11.prev = 19;
+          _context11.next = 22;
+          return fetchComments(myAppId, character.id);
+        case 22:
+          updatedComments = _context11.sent;
+          commentsList.innerHTML = '';
+          updatedComments.forEach(function (comment) {
+            var commentItem = document.createElement('li');
+            commentItem.className = 'comment-';
+            commentItem.textContent = comment;
+            commentsList.appendChild(commentItem);
+          });
+          _context11.next = 30;
+          break;
+        case 27:
+          _context11.prev = 27;
+          _context11.t0 = _context11["catch"](19);
+          throw new Error('Error updating comments:', _context11.t0);
+        case 30:
+        case "end":
+          return _context11.stop();
+      }
+    }, _callee11, null, [[19, 27]]);
+  }));
+  return function updateModalContent(_x9) {
+    return _ref11.apply(this, arguments);
+  };
+}();
+var addComment = /*#__PURE__*/function () {
+  var _ref12 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12(characterId, name, comment) {
+    var response;
+    return _regeneratorRuntime().wrap(function _callee12$(_context12) {
+      while (1) switch (_context12.prev = _context12.next) {
+        case 0:
+          _context12.prev = 0;
+          _context12.next = 3;
+          return fetch("https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/".concat(myAppId, "/comments"), {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              item_id: characterId,
+              username: name,
+              comment: comment
+            })
+          });
+        case 3:
+          response = _context12.sent;
+          if (response.ok) {
+            _context12.next = 6;
+            break;
+          }
+          throw new Error('Failed to add comment');
+        case 6:
+          _context12.next = 11;
+          break;
+        case 8:
+          _context12.prev = 8;
+          _context12.t0 = _context12["catch"](0);
+          throw new Error('Error adding comment');
+        case 11:
+        case "end":
+          return _context12.stop();
+      }
+    }, _callee12, null, [[0, 8]]);
+  }));
+  return function addComment(_x10, _x11, _x12) {
+    return _ref12.apply(this, arguments);
+  };
+}();
+var button = document.getElementById('button');
+var nameInput = document.querySelector('.nameInput');
+var insight = document.querySelector('.insightInput');
+var insertComment = /*#__PURE__*/function () {
+  var _ref13 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13(event) {
+    var commentButton, characterId, modalBody, updatedComments, commentList;
+    return _regeneratorRuntime().wrap(function _callee13$(_context13) {
+      while (1) switch (_context13.prev = _context13.next) {
+        case 0:
+          commentButton = event.target;
+          characterId = commentButton.getAttribute('data-id');
+          modalBody = document.querySelector('.modal-body');
+          if (modalBody) {
+            _context13.next = 5;
+            break;
+          }
+          throw new Error('Modal body not found');
+        case 5:
+          _context13.prev = 5;
+          _context13.next = 8;
+          return addComment(characterId, nameInput.value, insight.value);
+        case 8:
+          _context13.next = 10;
+          return fetchComments(myAppId, characterId);
+        case 10:
+          updatedComments = _context13.sent;
+          commentList = modalBody.querySelector('.comment-body');
+          if (commentList) {
+            _context13.next = 14;
+            break;
+          }
+          throw new Error('Comments list not found');
+        case 14:
+          commentList.innerHTML = '';
+          updatedComments.forEach(function (comment) {
+            var commentItem = document.createElement('li');
+            commentItem.className = 'comment-';
+            commentItem.textContent = comment;
+            commentList.appendChild(commentItem);
+          });
+          _context13.next = 21;
+          break;
+        case 18:
+          _context13.prev = 18;
+          _context13.t0 = _context13["catch"](5);
+          throw new Error('Error adding comment:', _context13.t0);
+        case 21:
+          nameInput.value = '';
+          insight.value = '';
+        case 23:
+        case "end":
+          return _context13.stop();
+      }
+    }, _callee13, null, [[5, 18]]);
+  }));
+  return function insertComment(_x13) {
+    return _ref13.apply(this, arguments);
+  };
+}();
+button.addEventListener('click', insertComment);
+var isInitialized = false;
+var modalBody;
+var modal;
+var initialize = /*#__PURE__*/function () {
+  var _ref14 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
+    var charactersContainer;
+    return _regeneratorRuntime().wrap(function _callee15$(_context15) {
+      while (1) switch (_context15.prev = _context15.next) {
+        case 0:
+          if (isInitialized) {
+            _context15.next = 8;
+            break;
+          }
+          _context15.next = 3;
+          return loadCharacters();
+        case 3:
+          countCharacters();
+          charactersContainer = document.querySelector('.all-characters');
+          charactersContainer.addEventListener('click', /*#__PURE__*/function () {
+            var _ref15 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee14(event) {
+              var characterId, _characterId, card, commentsList, updatedComments;
+              return _regeneratorRuntime().wrap(function _callee14$(_context14) {
+                while (1) switch (_context14.prev = _context14.next) {
+                  case 0:
+                    if (!event.target.classList.contains('fa-heart')) {
+                      _context14.next = 10;
+                      break;
+                    }
+                    event.stopImmediatePropagation();
+                    characterId = event.target.getAttribute('data-id');
+                    event.target.classList.add('disabled');
+                    _context14.prev = 4;
+                    _context14.next = 7;
+                    return addLike(characterId);
+                  case 7:
+                    _context14.prev = 7;
+                    event.target.classList.remove('disabled');
+                    return _context14.finish(7);
+                  case 10:
+                    if (!event.target.classList.contains('comment')) {
+                      _context14.next = 38;
+                      break;
+                    }
+                    _characterId = event.target.getAttribute('data-id');
+                    button.setAttribute('data-id', _characterId);
+                    if (!_characterId) {
+                      _context14.next = 37;
+                      break;
+                    }
+                    card = cWithDetails.find(function (card) {
+                      return card.id.toString() === _characterId;
+                    });
+                    if (!card) {
+                      _context14.next = 35;
+                      break;
+                    }
+                    _context14.next = 18;
+                    return updateModalContent(card);
+                  case 18:
+                    modalBody = document.querySelector('.modal-body');
+                    if (modalBody) {
+                      _context14.next = 21;
+                      break;
+                    }
+                    throw new Error('Modal body not found');
+                  case 21:
+                    commentsList = modalBody.querySelector('.comment-body');
+                    if (!commentsList) {
+                      _context14.next = 34;
+                      break;
+                    }
+                    _context14.prev = 23;
+                    _context14.next = 26;
+                    return fetchComments(myAppId, _characterId);
+                  case 26:
+                    updatedComments = _context14.sent;
+                    commentsList.innerHTML = '';
+                    updatedComments.forEach(function (comment) {
+                      var commentItem = document.createElement('li');
+                      commentItem.className = 'comment-';
+                      commentItem.textContent = comment;
+                      commentsList.appendChild(commentItem);
+                    });
+                    _context14.next = 34;
+                    break;
+                  case 31:
+                    _context14.prev = 31;
+                    _context14.t0 = _context14["catch"](23);
+                    throw new Error('Error updating comments:', _context14.t0);
+                  case 34:
+                    modal.show();
+                  case 35:
+                    _context14.next = 38;
+                    break;
+                  case 37:
+                    throw new Error('Character ID not found in clicked element');
+                  case 38:
+                  case "end":
+                    return _context14.stop();
+                }
+              }, _callee14, null, [[4,, 7, 10], [23, 31]]);
+            }));
+            return function (_x14) {
+              return _ref15.apply(this, arguments);
+            };
+          }());
+          modal = new bootstrap.Modal(document.getElementById('modal-container'));
+          isInitialized = true;
+        case 8:
+        case "end":
+          return _context15.stop();
+      }
+    }, _callee15);
+  }));
+  return function initialize() {
+    return _ref14.apply(this, arguments);
+  };
+}();
 window.addEventListener('load', initialize);
 
 /***/ })
@@ -480,42 +748,84 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-document.addEventListener('DOMContentLoaded', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-  var commentSpans;
-  return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-    while (1) switch (_context2.prev = _context2.next) {
+document.addEventListener('DOMContentLoaded', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+  var charactersContainer, commentSpans;
+  return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+    while (1) switch (_context3.prev = _context3.next) {
       case 0:
-        _context2.next = 2;
+        _context3.prev = 0;
+        _context3.next = 3;
         return (0,_modules_loadCharacters_js__WEBPACK_IMPORTED_MODULE_0__.loadCharacters)();
-      case 2:
-        // Add event listener to each "Comments" span
-        commentSpans = document.querySelectorAll('.comment');
-        commentSpans.forEach(function (commentSpan) {
-          commentSpan.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-            var characterId, character;
+      case 3:
+        charactersContainer = document.querySelector('.all-characters');
+        charactersContainer.addEventListener('click', /*#__PURE__*/function () {
+          var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(event) {
+            var characterId;
             return _regeneratorRuntime().wrap(function _callee$(_context) {
               while (1) switch (_context.prev = _context.next) {
                 case 0:
-                  characterId = commentSpan.getAttribute('data-id');
-                  _context.next = 3;
-                  return (0,_modules_loadCharacters_js__WEBPACK_IMPORTED_MODULE_0__.fetchCharacterDetails)(characterId);
-                case 3:
-                  character = _context.sent;
-                  if (character) {
-                    (0,_modules_loadCharacters_js__WEBPACK_IMPORTED_MODULE_0__.updateModalContent)(character);
+                  if (!event.target.classList.contains('fa-heart')) {
+                    _context.next = 7;
+                    break;
                   }
-                case 5:
+                  event.stopImmediatePropagation();
+                  characterId = event.target.getAttribute('data-id');
+                  event.target.classList.add('disabled');
+                  _context.next = 6;
+                  return (0,_modules_loadCharacters_js__WEBPACK_IMPORTED_MODULE_0__.addLike)(characterId);
+                case 6:
+                  event.target.classList.remove('disabled');
+                case 7:
                 case "end":
                   return _context.stop();
               }
             }, _callee);
+          }));
+          return function (_x) {
+            return _ref2.apply(this, arguments);
+          };
+        }());
+        _context3.next = 10;
+        break;
+      case 7:
+        _context3.prev = 7;
+        _context3.t0 = _context3["catch"](0);
+        throw new Error('Error:', _context3.t0);
+      case 10:
+        commentSpans = document.querySelectorAll('.comment');
+        commentSpans.forEach(function (commentSpan) {
+          commentSpan.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+            var characterId, character, comments;
+            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+              while (1) switch (_context2.prev = _context2.next) {
+                case 0:
+                  characterId = commentSpan.getAttribute('data-id');
+                  _context2.next = 3;
+                  return (0,_modules_loadCharacters_js__WEBPACK_IMPORTED_MODULE_0__.fetchCharacterDetails)(characterId);
+                case 3:
+                  character = _context2.sent;
+                  if (!character) {
+                    _context2.next = 10;
+                    break;
+                  }
+                  _context2.next = 7;
+                  return (0,_modules_loadCharacters_js__WEBPACK_IMPORTED_MODULE_0__.fetchComments)('bteUMr9caK7j5e9t91ze', characterId);
+                case 7:
+                  comments = _context2.sent;
+                  character.comments = comments;
+                  (0,_modules_loadCharacters_js__WEBPACK_IMPORTED_MODULE_0__.updateModalContent)(character);
+                case 10:
+                case "end":
+                  return _context2.stop();
+              }
+            }, _callee2);
           })));
         });
-      case 4:
+      case 12:
       case "end":
-        return _context2.stop();
+        return _context3.stop();
     }
-  }, _callee2);
+  }, _callee3, null, [[0, 7]]);
 })));
 })();
 
