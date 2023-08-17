@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+.header,
+footer {
+  background-color: antiquewhite;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.header-list {
+  justify-self: end;
+}
+
+.header,
+.header-list {
+  display: flex;
+}
+
+.header img {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #fff;
+
+  /* background: url(img/duck.png) no-repeat; */
+  -moz-box-shadow: 0 6px 5px #ccc;
+  -webkit-box-shadow: 0 6px 5px #ccc;
+  box-shadow: 0 6px 5px #ccc;
+  -moz-border-radius: 190px;
+  -webkit-border-radius: 190px;
+  border-radius: 190px;
+}
+
+.header img,
+li {
+  cursor: pointer;
+  margin: 0 40px 0 40px;
+}
+
+.header img:hover {
+  /* filter: opacity(0.5) drop-shadow(0 0 #00ffc8); */
+  transform: scale(1.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.header ul {
+  list-style-type: none;
+  font-size: 30px;
+  font-weight: bold;
+  color: #1d4f84;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+li:nth-child(1) {
+  text-decoration: underline;
+}
+
+footer {
+  font-size: 30px;
+  color: #1d4f84;
+}
+
+hr {
+  border: 2px solid #1d4f84;
+}
