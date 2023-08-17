@@ -4,10 +4,12 @@ import {
   fetchCharacterDetails,
   updateModalContent,
   fetchComments,
+  newCharacter,
 } from './modules/loadCharacters.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    await newCharacter();
     await loadCharacters();
 
     const charactersContainer = document.querySelector('.all-characters');
