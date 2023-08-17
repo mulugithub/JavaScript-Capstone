@@ -1,4 +1,5 @@
 import {
+  addLike,
   loadCharacters,
   fetchCharacterDetails,
   updateModalContent,
@@ -6,7 +7,6 @@ import {
 } from './modules/loadCharacters.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-
   try {
     await loadCharacters();
 
