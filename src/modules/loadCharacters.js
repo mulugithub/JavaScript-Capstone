@@ -1,5 +1,18 @@
 /* global bootstrap */
-const myAppId = '3rhiucgu7avOD8E9hBq1';
+const myAppId = '9vrG0tyBXBwoGkanoEnf';
+
+// export const newCharacter = async () => {
+// const baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi';
+// const appEndpoint = '/apps/';
+
+// Make a POST request to create a new app
+// const createAppUrl = baseUrl + appEndpoint;
+// const createAppResponse = await fetch(createAppUrl, { method: 'POST' });
+// const appId = await createAppResponse.text();
+
+// Log the app ID
+// console.log('App ID:', appId);
+// };
 
 export const fetchCharacters = async () => {
   try {
@@ -56,9 +69,17 @@ export const fetchLikesFromInvolvementAPI = async (characters) => {
       if (response.ok) {
         const data = await response.json();
         likes[characterId] = data.likes;
+      } else {
+        throw new Error(`Failed to fetch likes for character ${characterId}. Status: ${response.status}`);
       }
     } catch (error) {
-      throw new Error(`Error fetching likes for character ${characterId}: ${error}`);
+      console.error(`Error fetching likes for character ${characterId}:`, error);
+      likes[characterId] = 0; // Set likes to 0 for the character if there's an error
+
+      // Handle the specific error of unexpected end of JSON input
+      if (error instanceof SyntaxError && error.message === 'Unexpected end of JSON input') {
+        console.warn(`Invalid JSON response for character ${characterId}. Setting likes to 0.`);
+      }
     }
   }));
 
