@@ -3,8 +3,8 @@ import {
   loadCharacters,
   fetchCharacterDetails,
   updateModalContent,
-  fetchComments,
 } from './modules/loadCharacters.js';
+import fetchComments from './modules/fetchComments.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
