@@ -1,51 +1,71 @@
-import countComments from '../modules/countComments.js';
-import fetchComments from '../modules/fetchComments.js';
-// Mock the fetchComments function
-jest.mock('../modules/fetchComments.js', () => jest.fn());
+import countComments from '../modules/countComments';
+import fetchComments from '../modules/fetchComments';
 
-describe('updateCommentCount', () => {
-  beforeEach(() => {
-    // Clear the mock implementation and mockReturnValue of fetchComments before each test
-    fetchComments.mockClear();
-    fetchComments.mockReturnValue([]);
+// Mock the fetch function
+global.fetch = jest.fn();
+
+describe('countComments', () => {
+  it('should update the comment count element with the correct count', () => {
+    // Arrange
+    document.body.innerHTML = '<div id="comment-counter"></div>';
+    const data = [
+      { id: 1, comment: 'Great post!', username: 'user1' },
+      { id: 2, comment: 'Nice work!', username: 'user2' },
+    ];
+
+    // Act
+    countComments(data);
+
+    // Assert
+    const commentCountElement = document.getElementById('comment-counter');
+    expect(commentCountElement.textContent).toBe(`Comments(${data.length})`);
+  });
+});
+
+describe('fetchComments', () => {
+  afterEach(() => {
+    fetch.mockClear();
+  });
+  it('should fetch comments successfully and return the data', async () => {
+    // Arrange
+    const mockAppId = 'mockAppId';
+    const mockCharacterId = 'mockCharacterId';
+    const mockData = [
+      {
+        id: 1, comment: 'Great post!', username: 'user1', creation_date: '2023-08-18',
+      },
+      {
+        id: 2, comment: 'Nice work!', username: 'user2', creation_date: '2023-08-19',
+      },
+    ];
+    const mockResponse = { ok: true, json: jest.fn().mockResolvedValue(mockData) };
+    fetch.mockResolvedValue(mockResponse);
+
+    // Act
+    const result = await fetchComments(mockAppId, mockCharacterId);
+
+    // Assert
+    expect(fetch).toHaveBeenCalledWith(
+      `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${mockAppId}/comments?item_id=${mockCharacterId}`,
+    );
+    const expectedFormattedData = [
+      '8/18/2023 user1: Great post!',
+      '8/19/2023 user2: Nice work!',
+    ];
+    expect(result).toEqual(expectedFormattedData);
   });
 
-  it('should update the comment count element with the correct count', async () => {
-    // Mock the comment count element
-    document.body.innerHTML = '<div id="comment-count"></div>';
+  it('should throw an error if fetching comments fails', async () => {
+    // Arrange
+    const mockAppId = 'mockAppId';
+    const mockCharacterId = 'mockCharacterId';
+    const mockErrorMessage = 'Failed to fetch comments';
+    const mockResponse = { ok: false, text: jest.fn().mockResolvedValue(mockErrorMessage) };
+    fetch.mockResolvedValue(mockResponse);
 
-    // Call the updateCommentCount function with mock appId and itemId
-    await countComments('mockAppId', 'mockItemId');
-
-    // Check if fetchComments is called with the correct parameters
-    expect(fetchComments).toHaveBeenCalledWith('mockAppId', 'mockItemId');
-
-    // Check if the comment count element is updated with the correct count
-    expect(document.getElementById('comment-count').textContent).toBe('Comments(0)');
-  });
-
-  it('should display zero if no comment is found for an item', async () => {
-    // Mock the comment count element
-    document.body.innerHTML = '<div id="comment-count"></div>';
-
-    // Mock the fetchComments function to return an empty array
-    fetchComments.mockResolvedValue([]);
-
-    // Call the updateCommentCount function with mock appId and itemId
-    await countComments('mockAppId', 'mockItemId');
-
-    // Check if fetchComments is called with the correct parameters
-    expect(fetchComments).toHaveBeenCalledWith('mockAppId', 'mockItemId');
-
-    // Check if the comment count element is updated with the correct count
-    expect(document.getElementById('comment-count').textContent).toBe('Comments(0)');
-  });
-
-  it('should throw an error if fetchComments fails', async () => {
-    // Mock the fetchComments function to throw an error
-    fetchComments.mockRejectedValue(new Error('Fetch comments failed'));
-
-    // Call the updateCommentCount function with mock appId and itemId
-    await expect(countComments('mockAppId', 'mockItemId')).rejects.toThrow('Fetch comments failed');
+    // Act and Assert
+    await expect(async () => {
+      await fetchComments(mockAppId, mockCharacterId);
+    }).rejects.toThrowError(`Failed to fetch comments: ${mockErrorMessage}`);
   });
 });
