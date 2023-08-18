@@ -1,26 +1,6 @@
 /* global bootstrap */
 const myAppId = '3rhiucgu7avOD8E9hBq1';
 
-export const newCharacter = async () => {
-  const data = {
-    name: 'My Character',
-  };
-
-  await fetch('https://rickandmortyapi.com/api/character', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      const myId = result.result.split(': ')[1];
-      console.log(`Character created successfully! Character ID:${myId}`);
-    })
-    .catch((error) => error);
-};
-
 export const fetchCharacters = async () => {
   try {
     const response = await fetch('https://rickandmortyapi.com/api/character');
