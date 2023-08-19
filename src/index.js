@@ -1,10 +1,12 @@
+import './style.css';
+
 import {
   addLike,
   loadCharacters,
   fetchCharacterDetails,
   updateModalContent,
-  fetchComments,
 } from './modules/loadCharacters.js';
+import fetchComments from './modules/fetchComments';
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const character = await fetchCharacterDetails(characterId);
 
       if (character) {
-        const comments = await fetchComments('bteUMr9caK7j5e9t91ze', characterId);
+        const comments = await fetchComments('9vrG0tyBXBwoGkanoEnf', characterId);
         character.comments = comments;
         updateModalContent(character);
       }

@@ -1,9 +1,9 @@
 <div align="center">
 
-  <img src="./src/asset/my Logo.gif" alt="logo" width="140"  height="auto" />
+  <img src="./src/asset/movie-app-logo" alt="logo" width="140"  height="auto" />
   <br/>
 
-  <h3><b>Leaderboard App</b></h3>
+  <h3><b>Awesome Movie App</b></h3>
 
 </div>
 <!-- TABLE OF CONTENTS -->
@@ -30,13 +30,13 @@
 
 # 📖 [Awesome Movie App] <a name="about-project"></a>
 
-**[Awesome Movie App]** Awesome movie app is a single-page app that lists movies by categories. Users can like their favorite movies, open details about each movie and leave comments. Built with JavaScript and API.
+**[Awesome Movie App]** Awesome movie app is a single-page app. Users can like their favorite character, open details about each character and leave comments. Built with JavaScript and API.
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
 
-> This leaderboard app with ES6 bulit with HTML , CSS, Javascript and API
+> This movie app with ES6 bulit with HTML , CSS, Javascript and API
 <details>
   <summary>Structure</summary>
   <ul>
@@ -68,7 +68,7 @@
 <details>
 <summary>API</summary>
   <ul>
-    <li><a href="https://www.tvmaze.com/api">TVMAZE API service</a></li>
+    <li><a href="https://rickandmortyapi.com/">The Rick and Morty API</a></li>
   </ul>
 </details>
 
@@ -84,7 +84,11 @@
 - [ ]  style the app with CSS loader
 - [ ]  HTML webpack plugin
 - [ ]  Add header and footer.
-- [ ] Display character movies list on home page
+- [ ]  Display character movies list on home page
+- [ ]  Display popup comments
+- [ ]  Display the number of likes for each movies
+- [ ]  Add new likes and comment features
+- [ ]  Add test for like and comment counters
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,8 +97,9 @@
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 > Click the live demo to access the application.
-
 - [Click here to see the Live Demo](https://mulugithub.github.io/JavaScript-Capstone/dist/) of the project.
+> Click the following link for project description video.
+- [Click here to see video description](https://mulugithub.github.io/JavaScript-Capstone/dist/) of the project
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -172,10 +177,9 @@ To check for js errors run:
 ## 🔭 Future Features <a name="future-features"></a>
 
 > The following features will add to the project.
-- [ ] Display popup comments
-- [ ] Display the number of likes for each movies
-- [ ] Add new likes and comment features
-- [ ] Add test for like and comment counters
+- [ ] Rebuilt using React
+- [ ] Add search character feature
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- CONTRIBUTING -->
@@ -200,7 +204,7 @@ If you like this project, give it a star on GitHub.
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-- I would like to thank Microverse team to give this project and the MV code reviewers.
+- we would like to thank Microverse team to give this project and the MV code reviewers.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

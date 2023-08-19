@@ -1,10 +1,10 @@
 import countComments from './countComments';
 
-const fetchComments = async (appId, characterId) => {
+const fetchComments = async (myAppId, characterId) => {
   // eslint-disable-next-line no-useless-catch
   try {
     const queryString = `?item_id=${characterId}`;
-    const url = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/comments${queryString}`;
+    const url = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${myAppId}/comments${queryString}`;
 
     const response = await fetch(url);
 

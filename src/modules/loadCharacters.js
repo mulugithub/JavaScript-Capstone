@@ -1,18 +1,7 @@
+import countCharacters from './countCharacters';
+import fetchComments from './fetchComments';
 /* global bootstrap */
 const myAppId = '9vrG0tyBXBwoGkanoEnf';
-
-// export const newCharacter = async () => {
-// const baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi';
-// const appEndpoint = '/apps/';
-
-// Make a POST request to create a new app
-// const createAppUrl = baseUrl + appEndpoint;
-// const createAppResponse = await fetch(createAppUrl, { method: 'POST' });
-// const appId = await createAppResponse.text();
-
-// Log the app ID
-// console.log('App ID:', appId);
-// };
 
 export const fetchCharacters = async () => {
   try {
@@ -147,7 +136,6 @@ export const loadCharacters = async () => {
         </div>
         <div class="reactions">
           <span class="comment" data-id="${character.id}" data-bs-toggle="modal" data-bs-target="#modal-container">Comments</span>
-          <span class="reservation">Reservations</span>
         </div>
       `;
 
@@ -157,89 +145,63 @@ export const loadCharacters = async () => {
   return cWithDetails;
 };
 
-const countCharacters = async () => {
-  const characters = await fetchCharacters();
-  const characterCountElement = document.getElementById('character-count');
-  characterCountElement.textContent = `Characters(${characters.length})`;
-};
-
-const countComments = async (data) => {
-  const commentCountElement = document.getElementById('comment-counter');
-  commentCountElement.textContent = `Comments(${data.length < 1 ? 0 : data.length})`;
-};
-
-export const fetchComments = async (appId, characterId) => {
+export const updateModalContent = async (character) => {
   try {
-    const queryString = `?item_id=${characterId}`;
-    const url = `https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/${appId}/comments${queryString}`;
+    const modalBody = document.querySelector('.modal-body');
+    if (!modalBody) {
+      throw new Error('Modal body not found');
+    }
 
-    const response = await fetch(url);
+    const characterContainer = modalBody.querySelector('.character-content');
+    if (!characterContainer) {
+      throw new Error('Character container not found');
+    }
 
-    if (response.ok) {
-      const data = await response.json();
-      countComments(data);
-      return data.map((comment) => {
-        const formattedDate = new Date(comment.creation_date).toLocaleDateString();
-        return `${formattedDate} ${comment.username}: ${comment.comment}`;
+    const features1 = modalBody.querySelector('.features-1');
+    if (!features1) {
+      throw new Error('Features 1 container not found');
+    }
+
+    const features2 = modalBody.querySelector('.features-2');
+    if (!features2) {
+      throw new Error('Features 2 container not found');
+    }
+
+    const commentsList = modalBody.querySelector('.comment-body');
+    if (!commentsList) {
+      throw new Error('Comments list not found');
+    }
+
+    characterContainer.querySelector('img').src = character.image;
+    characterContainer.querySelector('p').textContent = character.name;
+
+    features1.innerHTML = `
+      <p><b>Status:</b> ${character.status || 'Unknown'}</p>
+      <p><b>Species:</b> ${character.species || 'Unknown'}</p>
+    `;
+
+    features2.innerHTML = `
+      <p><b>Gender:</b> ${character.gender || 'Unknown'}</p>
+      <p><b>Origin:</b> ${character.origin?.name || 'Unknown'}</p>
+    `;
+
+   
+    commentsList.innerHTML = '';
+
+    const updatedComments = await fetchComments(myAppId, character.id);
+    if (updatedComments.length === 0) {
+      commentsList.innerHTML = '<li>No comments available.</li>';
+    } else {
+      updatedComments.forEach((comment) => {
+        const commentItem = document.createElement('li');
+        commentItem.className = 'comment-item';
+        commentItem.textContent = comment;
+        commentsList.appendChild(commentItem);
       });
     }
-    const errorMessage = await response.text();
-    throw new Error(`Failed to fetch comments: ${errorMessage}`);
   } catch (error) {
-    return [];
-  }
-};
-
-export const updateModalContent = async (character) => {
-  const modalBody = document.querySelector('.modal-body');
-  if (!modalBody) {
-    throw new Error('Modal body not found');
-  }
-
-  const characterContainer = modalBody.querySelector('.character-content');
-  if (!characterContainer) {
-    throw new Error('Character container not found');
-  }
-
-  const features1 = modalBody.querySelector('.features-1');
-  if (!features1) {
-    throw new Error('Features 1 container not found');
-  }
-
-  const features2 = modalBody.querySelector('.features-2');
-  if (!features2) {
-    throw new Error('Features 2 container not found');
-  }
-
-  const commentsList = modalBody.querySelector('.comment-body');
-  if (!commentsList) {
-    throw new Error('Comments list not found');
-  }
-
-  characterContainer.querySelector('img').src = character.image;
-  characterContainer.querySelector('p').textContent = character.name;
-
-  features1.innerHTML = `
-    <p><b>Status:</b> ${character.status || 'Unknown'}</p>
-    <p><b>Species:</b> ${character.species || 'Unknown'}</p>
-  `;
-
-  features2.innerHTML = `
-    <p><b>Gender:</b> ${character.gender || 'Unknown'}</p>
-    <p><b>Origin:</b> ${character.origin?.name || 'Unknown'}</p>
-  `;
-
-  try {
-    const updatedComments = await fetchComments(myAppId, character.id);
-    commentsList.innerHTML = '';
-    updatedComments.forEach((comment) => {
-      const commentItem = document.createElement('li');
-      commentItem.className = 'comment-';
-      commentItem.textContent = comment;
-      commentsList.appendChild(commentItem);
-    });
-  } catch (error) {
-    throw new Error('Error updating comments:', error);
+    console.error('Error updating comments:', error);
+    throw error;
   }
 };
 
