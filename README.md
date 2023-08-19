@@ -99,7 +99,7 @@
 > Click the live demo to access the application.
 - [Click here to see the Live Demo](https://mulugithub.github.io/JavaScript-Capstone/dist/) of the project.
 > Click the following link for project description video.
-- [Click here to see video description](https://mulugithub.github.io/JavaScript-Capstone/dist/) of the project
+- [Click here to see video description of the project](https://drive.google.com/file/d/1Tuye5XMMx5aEQlLrz-a2RWYj1E0BeElG/view?usp=sharing)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
