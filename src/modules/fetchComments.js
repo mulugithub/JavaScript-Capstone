@@ -25,7 +25,7 @@ const fetchComments = async (myAppId, characterId) => {
       return `${formattedDate} ${comment.username}: ${comment.comment}`;
     });
   } catch (error) {
-    throw error;
+    throw new Error(error);
   }
 };
 

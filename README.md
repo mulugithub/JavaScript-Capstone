@@ -168,7 +168,9 @@ To check for js errors run:
 
 👤 **Author2**
 
-- GitHub: [@mulugithub](https://github.com/Edgahkipkemoi)
+- GitHub: [@Edgahu Kipkemoi](https://github.com/Edgahkipkemoi)
+- LinkedIn: [@Edgahu Kipkemoi](https://www.linkedin.com/in/edgah-kipkemoi-3797b8257)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
