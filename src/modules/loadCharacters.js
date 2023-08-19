@@ -185,7 +185,6 @@ export const updateModalContent = async (character) => {
       <p><b>Origin:</b> ${character.origin?.name || 'Unknown'}</p>
     `;
 
-   
     commentsList.innerHTML = '';
 
     const updatedComments = await fetchComments(myAppId, character.id);
